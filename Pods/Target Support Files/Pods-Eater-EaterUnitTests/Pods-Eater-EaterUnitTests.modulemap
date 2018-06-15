@@ -1,0 +1,6 @@
+framework module Pods_Eater_EaterUnitTests {
+  umbrella header "Pods-Eater-EaterUnitTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
