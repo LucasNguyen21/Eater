@@ -8,16 +8,31 @@
 
 import UIKit
 import CoreData
+import Firebase
+import FacebookCore
+import GoogleSignIn
+import GooglePlaces
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
-
+    var loginHandler = LoginHandler()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        GMSPlacesClient.provideAPIKey("AIzaSyDbuNXmBiNHwB5690ZuXWTGhTXsID3RqN4")
+        
+        FirebaseApp.configure()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        loginHandler.checkLogin(window: window!)
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let facebookHandler: Bool = SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        let gmailHandler: Bool = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        return facebookHandler || gmailHandler
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

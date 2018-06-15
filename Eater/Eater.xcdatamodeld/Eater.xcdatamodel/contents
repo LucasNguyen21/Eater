@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="OrderFood" representedClassName=".OrderFood" syncable="YES">
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qty" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="orderRestaurant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrderRestaurant" inverseName="orderFood" inverseEntity="OrderRestaurant" syncable="YES"/>
+    </entity>
+    <entity name="OrderRestaurant" representedClassName=".OrderRestaurant" syncable="YES">
+        <attribute name="owner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurantID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurantName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="orderFood" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderFood" inverseName="orderRestaurant" inverseEntity="OrderFood" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="OrderRestaurant" positionX="-297" positionY="-180" width="128" height="103"/>
+        <element name="OrderFood" positionX="-261" positionY="-135" width="128" height="120"/>
+    </elements>
 </model>
